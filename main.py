@@ -922,9 +922,9 @@ def msds(call):
     bot.delete_message(call.message.chat.id, call.message.message_id)
 
 # Folder tempat dokumen disimpan
-FOLDER_PATH = "dokumen"
-FOLDER_FOTO = "foto"
-FOLDER_LAB = "lab"
+FOLDER_PATH = "/storage/emulated/0/serverbot/dokumen"
+FOLDER_FOTO = "/storage/emulated/0/serverbot/foto"
+FOLDER_LAB = "/storage/emulated/0/serverbot/lab"
 
 # Command untuk kirim semua dokumen
 @bot.message_handler(commands=['bidintex'])

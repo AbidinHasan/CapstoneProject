@@ -102,7 +102,7 @@ def is_admin(user_id):
 def kirim_ke_semua(isiPesan):
     print("pesan broadcase berhasil")
     try:
-        with open("ID_SHARE.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_SHARE.txt", "r") as f:
             semua_id = f.read().splitlines()
         for chat_id in semua_id:
             bot.send_message(chat_id,isiPesan) #Isi pesan disini
@@ -116,7 +116,7 @@ def kirim_ke_semua(isiPesan):
 def eksekusi(message):
     isiPesan = message.text.split(' ', 1)[1]
     threading.Thread(target=kirim_ke_semua,args=(isiPesan,), daemon=True).start()    #untuk aktifkan
-    bot.reply_to(message, "Mengirim Broadcast Sukses")
+    bot.reply_to(message, "Mengirim Broadcast")
     print('Broadcast ke semua: '+isiPesan)
 
 #membuat Tombol
@@ -202,10 +202,10 @@ def simpan_text_user(message):
     print(waktu)
     print("user memberi pesan")
     user = message.from_user
-    with open("log_pesan.txt", "a") as file:
+    with open("/storage/emulated/0/serverbot/log_pesan.txt", "a") as file:
         file.write(f"{user.id} ({user.first_name}): {message.text}\n")
     kata = f'Pesan dari {user.first_name} :\n{message.text}'
-    bot.reply_to(message, "Masukkan diterima bolo ✅")
+    bot.reply_to(message, "Pesan diterima ✅\nTerimakasih masukannya")
     bot.send_message(admin_num, kata)
 
 
@@ -223,7 +223,7 @@ def handle_document(message):
     with open("/storage/emulated/0/serverbot/dokumen/" + f"file_dari_user_{filename}", 'wb') as new_file:
         new_file.write(downloaded_file)
 
-    bot.reply_to(message, f"File '{filename}' tersimpan")
+    bot.reply_to(message, f"File '{filename}' terkirim✅\nThank you")
 
 
 #Tolak video
@@ -232,7 +232,7 @@ def handle_video(message):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("deteksi video")
-    bot.reply_to(message, f"Sorry, tidak bisa menerima video bolo 🥲")
+    bot.reply_to(message, f"Sorry, kami tidak bisa menerima video")
     
 
 #Save foto yg dikirim
@@ -258,7 +258,7 @@ def handle_photo(message):
     with open("/storage/emulated/0/serverbot/foto/" + filename, 'wb') as new_file:
         new_file.write(downloaded_file)
 
-    bot.reply_to(message, "Foto tersimpan")
+    bot.reply_to(message, "Foto terkirim✅\nThank you")
 
 
 
@@ -307,7 +307,7 @@ def welcome(message):
     namaet = p.username if p.username else "(Tidak ada usename)"
 
     try:
-        with open("ID_LOGIN.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "r") as f:
             semua_id = f.read().splitlines()
     except FileNotFoundError:
         semua_id = []
@@ -315,13 +315,13 @@ def welcome(message):
     data_user = f"{userid}_({namaet})_{nama}"
 
     if data_user not in semua_id:
-        with open("ID_LOGIN.txt", "a") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "a") as f:
             f.write(data_user + "\n")
         print("User baru login")
     else:
         print("User lama")
 
-    welcome_text = f'Halo {nama} Selamat datang di IPAL'
+    welcome_text = f'Halo {nama} Selamat datang di layanan informasi IPAL'
     bot.send_message(message.chat.id, welcome_text, reply_markup=gen_markup())
     bot.delete_message(message.chat.id, message.message_id)
     notif = f"Siapa yg login : ({nama}) id : ({userid}) username : ({namaet})"
@@ -344,7 +344,7 @@ def tampilkan_opsi(message):
     
 
     try:
-        with open("ID_LOGIN.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "r") as f:
             semua_id = f.read().splitlines()
     except FileNotFoundError:
         semua_id = []
@@ -352,7 +352,7 @@ def tampilkan_opsi(message):
     data_user = f"{noid}_({namaet})_{nama}"
 
     if data_user not in semua_id:
-        with open("ID_LOGIN.txt", "a") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "a") as f:
             f.write(data_user + "\n")
         print("User baru login")
     else:
@@ -429,7 +429,7 @@ def handle_lihat_foto_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -452,7 +452,7 @@ def handle_lihat_tentang_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -488,7 +488,7 @@ def handle_lihat_video_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -579,13 +579,13 @@ def upload(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Sek bos", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu ya", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
         reply_markup=loading_markup
     )
-    kata = "Kirim : ... \n\n/edit      /help"
+    kata = "Kirim laporan atau komplain masalah bisa menggunakan foto dengan caption: ... \n\n/edit      /help"
     
     
     markup = types.InlineKeyboardMarkup()
@@ -1031,9 +1031,9 @@ def check_tcp_latency(host, port):
         if latency < 60:
             status = "🟢 good"
         elif latency <= 99:
-            status = "🟡 hmmm"
+            status = "🟡 Jaringan Server Lemah"
         else:
-            status = "🔴 burik"
+            status = "🔴 Jaringan Server Buruk"
         result_lines.append(f"\n\n⏳ {latency} ms → {status}")
         return f"\n🗓️ {timestamp}".join(result_lines)
     except Exception as e:

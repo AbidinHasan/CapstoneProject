@@ -84,7 +84,7 @@ def cuaca(message):
 🌡️ Suhu: {suhu}°C
 ☁️ Cuaca: {cuaca_desc}
 💧 Kelembapan: {kelembapan}%
-🌬️ Angin: {AnginSpeed}m/s
+🌬️ Kecepatan Angin: {AnginSpeed} m/s
         """
 
         bot.reply_to(message, hasil)
@@ -507,12 +507,10 @@ def tampilkan_laporan(chat_id):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("Kirim file Laporan")
-    filenya = "REPORT MINGGUAN IPAL.xlsx"
+    filenya = "/storage/emulated/0/serverbot/REPORT MINGGUAN IPAL.xlsx"
     with open (filenya, "rb" ) as Laporan_xsl:
         bot.send_document(chat_id, document=Laporan_xsl)
-    file2 = "Data Loging IPAL.xlsx"
-    with open (file2, "rb") as Laporan2 :
-        bot.send_document(chat_id, Laporan2)
+    
 
 # Trigger dari command
 @bot.message_handler(commands=['lapor'])
@@ -543,7 +541,7 @@ def tampilkan_hasillab(chat_id):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("Kirim file Laporan")
-    filenya = "HASIL LAB BARU.pdf"
+    filenya = "/storage/emulated/0/serverbot/HASIL LAB BARU.pdf"
     with open (filenya, "rb" ) as hasilLab:
         bot.send_document(chat_id, document=hasilLab)
    
@@ -1648,7 +1646,7 @@ def tombolWI(call):
     sisa8 = read_naoh(user_id)
     sisa9 = read_karung(user_id)
     sisa10 = read_bakteri(user_id)
-    print(sisa10)
+    
     #nutrisi
     if sisa1 <= 3:
         status = "🔴"

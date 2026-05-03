@@ -132,7 +132,7 @@ def gen_markup():
     markup.add(InlineKeyboardButton("Video IPAL", callback_data="cb3"), 
             InlineKeyboardButton("REPORT MINGGUAN", callback_data="cb4"))
     
-    markup.add(InlineKeyboardButton("(WI) WORK INSTRUCTION", callback_data="cb6"))
+    markup.add(InlineKeyboardButton("🌦️ Informasi Cuaca", callback_data="cb6"))
     markup.add(InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                InlineKeyboardButton("MSDS",callback_data="cb8"))
     markup.add(InlineKeyboardButton("UPLOAD 🚀", callback_data="cb7"),
@@ -150,26 +150,10 @@ def tombolWI(call):
     print(waktu)
     print("mencari WI")
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("BAK EQUALISASI",callback_data="wi1"),
-            types.InlineKeyboardButton("BAK NETRALISATOR",callback_data="wi2"))
     
-    markup.add(types.InlineKeyboardButton("BAK FLOKULATOR 1",callback_data="wi3"),
-            types.InlineKeyboardButton("BAK KOAGULATOR 1",callback_data="wi4"))
-    
-    markup.add(types.InlineKeyboardButton("BAK AN AEROB",callback_data="wi5"),
-            types.InlineKeyboardButton("BAK AEROB",callback_data="wi6"))
-    
-    markup.add(types.InlineKeyboardButton("BAK KOAGULATOR 2",callback_data="wi7"),
-            types.InlineKeyboardButton("BAK FLOKULATOR 2",callback_data="wi8"))
-    
-    markup.add(types.InlineKeyboardButton("BAK THIKENER",callback_data="wi9"),
-            types.InlineKeyboardButton("FILTER PRESS",callback_data="wi10"))
-    
-    markup.add(types.InlineKeyboardButton("POLIMER ANION",callback_data="wi11"),
-            types.InlineKeyboardButton("POLIMER CATION",callback_data="wi12"))
     markup.add(types.InlineKeyboardButton("Kembali ↩️", callback_data="wi13"))
     
-    kata = "PILIH WORK INSTRUCTION :"
+    kata = "Untuk request informasi cuaca anda bisa memasukkan perintah:\n\n/cuaca [kota]\nContoh: /cuaca Jakarta\n\nInfo Prediksi cuaca masukkan perintah\n\n/pred [kota]\nContoh: /pred Surabaya"
     bot.send_message(call.message.chat.id, kata, reply_markup=markup )
 
     
@@ -280,7 +264,7 @@ def tombolWI(call):
     markup.add(types.InlineKeyboardButton("Video IPAL", callback_data="cb3"), 
             types.InlineKeyboardButton("REPORT MINGGUAN", callback_data="cb4"))
     
-    markup.add(types.InlineKeyboardButton("(WI) WORK INSTRUCTION", callback_data="cb6"))
+    markup.add(types.InlineKeyboardButton("🌦️ Informasi Cuaca", callback_data="cb6"))
 
     markup.add(types.InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                types.InlineKeyboardButton("MSDS",callback_data="cb8"))

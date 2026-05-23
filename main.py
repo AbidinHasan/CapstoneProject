@@ -135,7 +135,7 @@ def gen_markup():
     markup.add(InlineKeyboardButton("🌦️ Informasi Cuaca", callback_data="cb6"))
     markup.add(InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                InlineKeyboardButton("MSDS",callback_data="cb8"))
-    markup.add(InlineKeyboardButton("UPLOAD 🚀", callback_data="cb7"),
+    markup.add(InlineKeyboardButton("LAPORKAN 🚀", callback_data="cb7"),
                InlineKeyboardButton("STOK",callback_data="cb9"))
     return markup
 
@@ -269,7 +269,7 @@ def tombolWI(call):
     markup.add(types.InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                types.InlineKeyboardButton("MSDS",callback_data="cb8"))
     
-    markup.add(types.InlineKeyboardButton("UPLOAD 🚀", callback_data="cb7"),
+    markup.add(types.InlineKeyboardButton("LAPORKAN 🚀", callback_data="cb7"),
                types.InlineKeyboardButton("STOK",callback_data="cb9"))
     
     kata = "MENU AWAL :"
@@ -567,7 +567,7 @@ def upload(call):
         message_id=call.message.message_id,
         reply_markup=loading_markup
     )
-    kata = "Kirim : ... \n\n/edit      /help"
+    kata = "Silahkan Kirim Aduan atau Saran, Sertakan bukti foto untuk mendukung pelaporan : ... "
     
     
     markup = types.InlineKeyboardMarkup()
@@ -577,259 +577,6 @@ def upload(call):
     
     bot.delete_message(call.message.chat.id, call.message.message_id)
 
-
-
-
-# WI EQUAL
-@bot.callback_query_handler(func=lambda call: call.data == "wi1")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_082%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Ekualisasi.pdf?updatedAt=1749008427848"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI NETRALISATOR
-@bot.callback_query_handler(func=lambda call: call.data == "wi2")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "ttps://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_083%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Netralisasi.pdf?updatedAt=1749008427260"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI FLOKULATOR 1
-@bot.callback_query_handler(func=lambda call: call.data == "wi3")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_085%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Flokulator-1.pdf?updatedAt=1749008422600"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-    
-
-# WI KOAGULATOR 1
-@bot.callback_query_handler(func=lambda call: call.data == "wi4")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_084%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Koagulator-1.pdf?updatedAt=1749008977528"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI ANAEROB
-@bot.callback_query_handler(func=lambda call: call.data == "wi5")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_086%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20AnAerob.pdf?updatedAt=1749008421821"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI AEROB
-@bot.callback_query_handler(func=lambda call: call.data == "wi6")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_087%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Aerob.pdf?updatedAt=1749008421451"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-    
-
-
-# WI KOAGULATOR 2
-@bot.callback_query_handler(func=lambda call: call.data == "wi7")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_088%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Koagulator-2.pdf?updatedAt=1749008422032"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI FLOKULATOR 2
-@bot.callback_query_handler(func=lambda call: call.data == "wi8")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_089%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Flokulator-2.pdf?updatedAt=1749008422136"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI THIKENER
-@bot.callback_query_handler(func=lambda call: call.data == "wi9")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_090%20Pengeporasian%20IPAL%20WWTP%20-%20Bak%20Thickener.pdf?updatedAt=1749008422393"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI FILTER PRESS
-@bot.callback_query_handler(func=lambda call: call.data == "wi10")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_091%20Pengeporasian%20IPAL%20WWTP%20-%20Filter%20Press.pdf?updatedAt=1749008422299"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI POLIMER ANION
-@bot.callback_query_handler(func=lambda call: call.data == "wi11")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_092%20Pengeporasian%20IPAL%20WWTP%20-%20Polimer%20Anion.pdf?updatedAt=1749008422324"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-
-
-
-# WI POLIMER CATION
-@bot.callback_query_handler(func=lambda call: call.data == "wi12")
-def wi(call):
-    bot.answer_callback_query(call.id)
-    print("golek WI")
-
-    loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Mencari data WI", callback_data="disabled"))
-    bot.edit_message_reply_markup(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        reply_markup=loading_markup
-    )
-    
-    link = "https://ik.imagekit.io/galleryBiden/dokumen/BPK_WI_093%20Pengeporasian%20IPAL%20WWTP%20-%20Polimer%20Cation.pdf?updatedAt=1749008422488"
-    bot.send_document(call.message.chat.id, link)
-
-    bot.delete_message(call.message.chat.id, call.message.message_id)
-    
 
 # msds wtc01
 @bot.callback_query_handler(func=lambda call: call.data == "ms1")

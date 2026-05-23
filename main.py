@@ -84,7 +84,7 @@ def cuaca(message):
 🌡️ Suhu: {suhu}°C
 ☁️ Cuaca: {cuaca_desc}
 💧 Kelembapan: {kelembapan}%
-🌬️ Angin: {AnginSpeed}m/s
+🌬️ Kecepatan Angin: {AnginSpeed} m/s
         """
 
         bot.reply_to(message, hasil)
@@ -102,7 +102,7 @@ def is_admin(user_id):
 def kirim_ke_semua(isiPesan):
     print("pesan broadcase berhasil")
     try:
-        with open("ID_SHARE.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_SHARE.txt", "r") as f:
             semua_id = f.read().splitlines()
         for chat_id in semua_id:
             bot.send_message(chat_id,isiPesan) #Isi pesan disini
@@ -116,7 +116,7 @@ def kirim_ke_semua(isiPesan):
 def eksekusi(message):
     isiPesan = message.text.split(' ', 1)[1]
     threading.Thread(target=kirim_ke_semua,args=(isiPesan,), daemon=True).start()    #untuk aktifkan
-    bot.reply_to(message, "Mengirim Broadcast Sukses")
+    bot.reply_to(message, "Mengirim Broadcast")
     print('Broadcast ke semua: '+isiPesan)
 
 #membuat Tombol
@@ -132,7 +132,7 @@ def gen_markup():
     markup.add(InlineKeyboardButton("Video IPAL", callback_data="cb3"), 
             InlineKeyboardButton("REPORT MINGGUAN", callback_data="cb4"))
     
-    markup.add(InlineKeyboardButton("(WI) WORK INSTRUCTION", callback_data="cb6"))
+    markup.add(InlineKeyboardButton("🌦️ Informasi Cuaca", callback_data="cb6"))
     markup.add(InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                InlineKeyboardButton("MSDS",callback_data="cb8"))
     markup.add(InlineKeyboardButton("UPLOAD 🚀", callback_data="cb7"),
@@ -150,26 +150,10 @@ def tombolWI(call):
     print(waktu)
     print("mencari WI")
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("BAK EQUALISASI",callback_data="wi1"),
-            types.InlineKeyboardButton("BAK NETRALISATOR",callback_data="wi2"))
     
-    markup.add(types.InlineKeyboardButton("BAK FLOKULATOR 1",callback_data="wi3"),
-            types.InlineKeyboardButton("BAK KOAGULATOR 1",callback_data="wi4"))
-    
-    markup.add(types.InlineKeyboardButton("BAK AN AEROB",callback_data="wi5"),
-            types.InlineKeyboardButton("BAK AEROB",callback_data="wi6"))
-    
-    markup.add(types.InlineKeyboardButton("BAK KOAGULATOR 2",callback_data="wi7"),
-            types.InlineKeyboardButton("BAK FLOKULATOR 2",callback_data="wi8"))
-    
-    markup.add(types.InlineKeyboardButton("BAK THIKENER",callback_data="wi9"),
-            types.InlineKeyboardButton("FILTER PRESS",callback_data="wi10"))
-    
-    markup.add(types.InlineKeyboardButton("POLIMER ANION",callback_data="wi11"),
-            types.InlineKeyboardButton("POLIMER CATION",callback_data="wi12"))
     markup.add(types.InlineKeyboardButton("Kembali ↩️", callback_data="wi13"))
     
-    kata = "PILIH WORK INSTRUCTION :"
+    kata = "Untuk request informasi cuaca anda bisa memasukkan perintah:\n\n/cuaca [kota]\nContoh: /cuaca Jakarta\n\nInfo Prediksi cuaca masukkan perintah\n\n/pred [kota]\nContoh: /pred Surabaya"
     bot.send_message(call.message.chat.id, kata, reply_markup=markup )
 
     
@@ -202,10 +186,10 @@ def simpan_text_user(message):
     print(waktu)
     print("user memberi pesan")
     user = message.from_user
-    with open("log_pesan.txt", "a") as file:
+    with open("/storage/emulated/0/serverbot/log_pesan.txt", "a") as file:
         file.write(f"{user.id} ({user.first_name}): {message.text}\n")
     kata = f'Pesan dari {user.first_name} :\n{message.text}'
-    bot.reply_to(message, "Masukkan diterima bolo ✅")
+    bot.reply_to(message, "Pesan diterima ✅\nTerimakasih masukannya")
     bot.send_message(admin_num, kata)
 
 
@@ -223,7 +207,7 @@ def handle_document(message):
     with open("/storage/emulated/0/serverbot/dokumen/" + f"file_dari_user_{filename}", 'wb') as new_file:
         new_file.write(downloaded_file)
 
-    bot.reply_to(message, f"File '{filename}' tersimpan")
+    bot.reply_to(message, f"File '{filename}' terkirim✅\nThank you")
 
 
 #Tolak video
@@ -232,7 +216,7 @@ def handle_video(message):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("deteksi video")
-    bot.reply_to(message, f"Sorry, tidak bisa menerima video bolo 🥲")
+    bot.reply_to(message, f"Sorry, kami tidak bisa menerima video")
     
 
 #Save foto yg dikirim
@@ -258,7 +242,7 @@ def handle_photo(message):
     with open("/storage/emulated/0/serverbot/foto/" + filename, 'wb') as new_file:
         new_file.write(downloaded_file)
 
-    bot.reply_to(message, "Foto tersimpan")
+    bot.reply_to(message, "Foto terkirim✅\nThank you")
 
 
 
@@ -280,7 +264,7 @@ def tombolWI(call):
     markup.add(types.InlineKeyboardButton("Video IPAL", callback_data="cb3"), 
             types.InlineKeyboardButton("REPORT MINGGUAN", callback_data="cb4"))
     
-    markup.add(types.InlineKeyboardButton("(WI) WORK INSTRUCTION", callback_data="cb6"))
+    markup.add(types.InlineKeyboardButton("🌦️ Informasi Cuaca", callback_data="cb6"))
 
     markup.add(types.InlineKeyboardButton("Hasil LAB 🔬", callback_data="cb5"),
                types.InlineKeyboardButton("MSDS",callback_data="cb8"))
@@ -307,7 +291,7 @@ def welcome(message):
     namaet = p.username if p.username else "(Tidak ada usename)"
 
     try:
-        with open("ID_LOGIN.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "r") as f:
             semua_id = f.read().splitlines()
     except FileNotFoundError:
         semua_id = []
@@ -315,13 +299,13 @@ def welcome(message):
     data_user = f"{userid}_({namaet})_{nama}"
 
     if data_user not in semua_id:
-        with open("ID_LOGIN.txt", "a") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "a") as f:
             f.write(data_user + "\n")
         print("User baru login")
     else:
         print("User lama")
 
-    welcome_text = f'Halo {nama} Selamat datang di IPAL'
+    welcome_text = f'Halo {nama} Selamat datang di layanan informasi IPAL'
     bot.send_message(message.chat.id, welcome_text, reply_markup=gen_markup())
     bot.delete_message(message.chat.id, message.message_id)
     notif = f"Siapa yg login : ({nama}) id : ({userid}) username : ({namaet})"
@@ -344,7 +328,7 @@ def tampilkan_opsi(message):
     
 
     try:
-        with open("ID_LOGIN.txt", "r") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "r") as f:
             semua_id = f.read().splitlines()
     except FileNotFoundError:
         semua_id = []
@@ -352,7 +336,7 @@ def tampilkan_opsi(message):
     data_user = f"{noid}_({namaet})_{nama}"
 
     if data_user not in semua_id:
-        with open("ID_LOGIN.txt", "a") as f:
+        with open("/storage/emulated/0/serverbot/ID_LOGIN.txt", "a") as f:
             f.write(data_user + "\n")
         print("User baru login")
     else:
@@ -429,7 +413,7 @@ def handle_lihat_foto_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -452,7 +436,7 @@ def handle_lihat_tentang_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -488,7 +472,7 @@ def handle_lihat_video_callback(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Tunggu sek kawan", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu kawan", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -507,12 +491,10 @@ def tampilkan_laporan(chat_id):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("Kirim file Laporan")
-    filenya = "REPORT MINGGUAN IPAL.xlsx"
+    filenya = "/storage/emulated/0/serverbot/REPORT MINGGUAN IPAL.xlsx"
     with open (filenya, "rb" ) as Laporan_xsl:
         bot.send_document(chat_id, document=Laporan_xsl)
-    file2 = "Data Loging IPAL.xlsx"
-    with open (file2, "rb") as Laporan2 :
-        bot.send_document(chat_id, Laporan2)
+    
 
 # Trigger dari command
 @bot.message_handler(commands=['lapor'])
@@ -543,7 +525,7 @@ def tampilkan_hasillab(chat_id):
     waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(waktu)
     print("Kirim file Laporan")
-    filenya = "HASIL LAB BARU.pdf"
+    filenya = "/storage/emulated/0/serverbot/HASIL LAB BARU.pdf"
     with open (filenya, "rb" ) as hasilLab:
         bot.send_document(chat_id, document=hasilLab)
    
@@ -579,13 +561,13 @@ def upload(call):
     
 
     loading_markup = InlineKeyboardMarkup()
-    loading_markup.add(InlineKeyboardButton("⏳ Sek bos", callback_data="disabled"))
+    loading_markup.add(InlineKeyboardButton("⏳ Tunggu ya", callback_data="disabled"))
     bot.edit_message_reply_markup(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
         reply_markup=loading_markup
     )
-    kata = "Kirim : ... \n\n/edit      /help"
+    kata = "Kirim laporan atau komplain masalah bisa menggunakan foto dengan caption: ..."
     
     
     markup = types.InlineKeyboardMarkup()
@@ -922,9 +904,9 @@ def msds(call):
     bot.delete_message(call.message.chat.id, call.message.message_id)
 
 # Folder tempat dokumen disimpan
-FOLDER_PATH = "dokumen"
-FOLDER_FOTO = "foto"
-FOLDER_LAB = "lab"
+FOLDER_PATH = "/storage/emulated/0/serverbot/dokumen"
+FOLDER_FOTO = "/storage/emulated/0/serverbot/foto"
+FOLDER_LAB = "/storage/emulated/0/serverbot/lab"
 
 # Command untuk kirim semua dokumen
 @bot.message_handler(commands=['bidintex'])
@@ -1031,9 +1013,9 @@ def check_tcp_latency(host, port):
         if latency < 60:
             status = "🟢 good"
         elif latency <= 99:
-            status = "🟡 hmmm"
+            status = "🟡 Jaringan Server Lemah"
         else:
-            status = "🔴 burik"
+            status = "🔴 Jaringan Server Buruk"
         result_lines.append(f"\n\n⏳ {latency} ms → {status}")
         return f"\n🗓️ {timestamp}".join(result_lines)
     except Exception as e:
@@ -1648,7 +1630,7 @@ def tombolWI(call):
     sisa8 = read_naoh(user_id)
     sisa9 = read_karung(user_id)
     sisa10 = read_bakteri(user_id)
-    print(sisa10)
+    
     #nutrisi
     if sisa1 <= 3:
         status = "🔴"

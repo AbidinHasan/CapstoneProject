@@ -567,7 +567,7 @@ def upload(call):
         message_id=call.message.message_id,
         reply_markup=loading_markup
     )
-    kata = "Kirim laporan atau komplain masalah bisa menggunakan foto dengan caption: ..."
+    kata = "Kirim : ... \n\n/edit      /help"
     
     
     markup = types.InlineKeyboardMarkup()
